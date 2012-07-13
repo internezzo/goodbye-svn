@@ -32,7 +32,8 @@ How to use it?
 
 Just clone this repository to a working directory of your choice. This will bring you a shell script to migrate your stuff to Git. Please make sure that the disk with your working directory has enough space for the repository to migrate as it will get checked out *twice* into your working copy!
 
-	git@github.com:internezzo/goodbye-svn.git
+	cd to/your/working/directory
+	git clone git@github.com:internezzo/goodbye-svn.git .
 	./goodbye-svn.sh <SVN-URL> <nameOfTheProject> <targetGitURL> <SVNUserName>
 
 An example:
