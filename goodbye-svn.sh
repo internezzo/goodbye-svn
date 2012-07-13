@@ -9,11 +9,21 @@ svnUser=$4
 # clone from the SVN repository
 git svn clone --stdlayout --no-metadata --no-minimize-url --authors-file svn_to_git_usernames.txt --prefix=svn/ --username $svnUser $originalUrl ${repoName}_tmp
 
+cd ${repoName}_tmp
+
+
+# strip out empty commits (e.g. from copying in SVN)
+echo
+echo
+echo "now going to remove the empty commits from SVN copy actions"
+git filter-branch --prune-empty --tag-name-filter cat -- --all
+
 
 
 # create a tag for each SVN tag that would show up as a branch in Git
-echo "now going to map all tags prooperly..."
-cd ${repoName}_tmp
+echo
+echo
+echo "now going to map all tags propperly..."
 git for-each-ref --format="%(refname)" refs/remotes/svn/tags/ |
 while read tag; do
 	echo ${tag}
