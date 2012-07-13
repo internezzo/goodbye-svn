@@ -9,10 +9,19 @@ git svn clone --stdlayout --no-metadata --no-minimize-url --authors-file svn_to_
 
 
 
-# wait to manually create tags and branches
-echo "Now go and add all the tags manually to the Git-Repository"
-echo
-read -p "Press ENTER to continue..."
+# create a tag for each SVN tag that would show up as a branch in Git
+echo "now going to map all tags prooperly..."
+cd ${repoName}_tmp
+git for-each-ref --format="%(refname)" refs/remotes/svn/tags/ |
+while read tag; do
+	echo ${tag}
+    GIT_COMMITTER_DATE="$(git log -1 --pretty=format:"%ad" "$tag")" \
+    GIT_COMMITTER_EMAIL="$(git log -1 --pretty=format:"%ce" "$tag")" \
+    GIT_COMMITTER_NAME="$(git log -1 --pretty=format:"%cn" "$tag")" \
+    git tag -m "$(git for-each-ref --format="%(contents)" "$tag")" \
+        ${tag#refs/remotes/svn/tags/} "$tag"
+done
+cd ..
 
 
 # now clone again locally to remove all SVN references
