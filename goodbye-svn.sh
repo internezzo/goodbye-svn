@@ -1,10 +1,12 @@
 #!/bin/bash
 
+# map the command line properties
 originalUrl=$1
 repoName=$2
 targetUrl=$3
 svnUser=$4
 
+# clone from the SVN repository
 git svn clone --stdlayout --no-metadata --no-minimize-url --authors-file svn_to_git_usernames.txt --prefix=svn/ --username $svnUser $originalUrl ${repoName}_tmp
 
 
