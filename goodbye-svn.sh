@@ -42,3 +42,11 @@ cd $repoName
 git remote rm origin
 git remote add origin $targetUrl
 git push -u origin master --tags
+cd ..
+
+# cleanup
+echo "We're through - hit enter to remove the local clones..."
+echo
+read -p "Press ENTER to continue..."
+rm -rf ${repoName}_tmp
+rm -rf ${repoName}
