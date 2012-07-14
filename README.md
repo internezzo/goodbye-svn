@@ -34,6 +34,13 @@ Just clone this repository to a working directory of your choice. This will brin
 
 	cd to/your/working/directory
 	git clone git@github.com:internezzo/goodbye-svn.git .
+
+Now before you call the script, create a file named "svn_to_git_usernames.txt", which contains a row for each SVN-Committer in the following form
+
+	username = Firstname Lastname <alias@example.org>
+
+Then you're ready to launch:
+
 	./goodbye-svn.sh <SVN-URL> <nameOfTheProject> <targetGitURL> <SVNUserName>
 
 An example:
